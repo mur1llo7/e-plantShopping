@@ -110,15 +110,13 @@ function ProductList({ onHomeClick }) {
         setShowCart(false);
     };
 
-    // ← Bug #4 fixed: uses cartItems from Redux, not undefined CartItems
     const calculateTotalQuantity = () => {
         return cartItems.reduce((total, item) => total + item.quantity, 0);
     };
 
-    // ← Bug #1 fixed: dispatch(addItem()) not dispatchEvent(addItem())
     const handleAddToCart = (plant) => {
         dispatch(addItem(plant));
-        setAddedToCart(prev => ({ ...prev, [plant.name]: true })); // disables button
+        setAddedToCart(prev => ({ ...prev, [plant.name]: true })); 
     };
 
     return (
@@ -137,7 +135,6 @@ function ProductList({ onHomeClick }) {
                 </div>
                 <div style={styleObjUl}>
                     <div><a href="#" onClick={handlePlantsClick} style={styleA}>Plants</a></div>
-                    {/* ← Bug #2 fixed: was {onCartClick}(e), now handleCartClick */}
                     <div>
                         <a href="#" onClick={handleCartClick} style={styleA}>
                             <h1 className='cart'>
@@ -147,7 +144,6 @@ function ProductList({ onHomeClick }) {
                                     <circle cx="184" cy="216" r="12"></circle>
                                     <path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                                 </svg>
-                                {/* ← Shows live item count on cart icon */}
                                 <span style={{ fontSize: '18px' }}>{calculateTotalQuantity()}</span>
                             </h1>
                         </a>
@@ -157,7 +153,6 @@ function ProductList({ onHomeClick }) {
 
             {!showCart ? (
                 <div className="product-grid">
-                    {/* ← Bug #3 fixed: actually renders the plants */}
                     {plantsArray.map((category) => (
                         <div key={category.category}>
                             <h2>{category.category}</h2>

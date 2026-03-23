@@ -1,15 +1,12 @@
 /* eslint-disable no-unused-vars */
-
 import React, { useState } from 'react';
 import ProductList from './ProductList';
-import CartItem from './CartItem';   
 import './App.css';
 import AboutUs from './AboutUs';
 
 function App() {
-  
   const [showProductList, setShowProductList] = useState(false);
-  const [showCart, setShowCart] = useState(false); 
+
 
   const handleGetStartedClick = () => {
     setShowProductList(true);
@@ -17,22 +14,11 @@ function App() {
 
   const handleHomeClick = () => {
     setShowProductList(false);
-    setShowCart(false);
-  };
-
-  const handleCartClick = () => {
-    setShowCart(true);
-    setShowProductList(false);
-  };
-
-  const handleContinueShopping = () => {
-    setShowCart(false);
-    setShowProductList(true);
   };
 
   return (
     <div className="app-container">
-      <div className={`landing-page ${showProductList || showCart ? 'fade-out' : ''}`}>
+      <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
         <div className="background-image"></div>
         <div className="content">
           <div className="landing_content">
@@ -52,15 +38,10 @@ function App() {
       <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
         <ProductList
           onHomeClick={handleHomeClick}
-          onCartClick={handleCartClick}
+          
         />
       </div>
-
-      {showCart && (
-        <div className="product-list-container visible">
-          <CartItem onContinueShopping={handleContinueShopping} />
-        </div>
-      )}
+      
     </div>
   );
 }

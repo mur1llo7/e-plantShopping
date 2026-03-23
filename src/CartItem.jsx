@@ -36,6 +36,8 @@ const CartItem = ({ onContinueShopping }) => {
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem(item.name));
     }
   };
 
@@ -49,6 +51,8 @@ const CartItem = ({ onContinueShopping }) => {
     const cost = parseFloat(item.cost.substring(1));
     return (quantity * cost).toFixed(2);
   };
+
+
 
   return (
     <div className="cart-container">
